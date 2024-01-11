@@ -1,18 +1,28 @@
-import React from 'react';
-import {View, StyleSheet, Text, useColorScheme, Image} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Text, useColorScheme, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 function SplashScreen(): JSX.Element {
-    const isDarkMode = useColorScheme() === 'dark';
-    const logoSource = isDarkMode ? require('../images/logo-black.png') : require('../images/logo-white.png');
+  const navigation = useNavigation();
+  const isDarkMode = useColorScheme() === 'dark';
+  const logoSource = isDarkMode ? require('../images/logo-black.png') : require('../images/logo-white.png');
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('RoleSelectScreen');
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View style={styles.mainArea}>
-      <Image
-        source={logoSource}
-        style={styles.image}
-        resizeMode="contain"
-      />
+        <Image
+          source={logoSource}
+          style={styles.image}
+          resizeMode="contain"
+        />
         <View style={styles.textContainer}>
           <Text style={[isDarkMode ? styles.whiteText : styles.blackText, styles.heading]}>
             MEDI
@@ -34,44 +44,43 @@ function SplashScreen(): JSX.Element {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#04b1b2',
-    },
-    whiteText: {
-        color: '#FFFFFF',
-    },
-    blackText: {
-        color: 'black',
-    },
-    heading: {
-      fontSize: 40,
-      fontWeight: 'bold',
-    },
-    mainArea: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    textContainer: {
-      flexDirection: 'row', 
-    },
-    image: {
-      width: 120,
-      height: 160,
-    },
-    slogon: {
-      marginTop: 10,
-      // color: '#FFFFFF',
-      textAlign: 'center',
-      letterSpacing: 1,
-      lineHeight: 25,
-      fontWeight: 'bold',
-    },
-    slogonView: {
-      paddingLeft: 50,
-      paddingRight: 50,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#04b1b2',
+  },
+  whiteText: {
+    color: '#FFFFFF',
+  },
+  blackText: {
+    color: 'black',
+  },
+  heading: {
+    fontSize: 40,
+    fontWeight: 'bold',
+  },
+  mainArea: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textContainer: {
+    flexDirection: 'row',
+  },
+  image: {
+    width: 120,
+    height: 160,
+  },
+  slogon: {
+    marginTop: 10,
+    textAlign: 'center',
+    letterSpacing: 1,
+    lineHeight: 25,
+    fontWeight: 'bold',
+  },
+  slogonView: {
+    paddingLeft: 50,
+    paddingRight: 50,
+  },
 });
 
 export default SplashScreen;
