@@ -2,9 +2,8 @@ import React from 'react';
 import {View, StyleSheet, Text, useColorScheme, Image} from 'react-native';
 
 function SplashScreen(): JSX.Element {
-
     const isDarkMode = useColorScheme() === 'dark';
-    const logoSource = isDarkMode ? require('./images/logo-black.png') : require('./images/logo-white.png');
+    const logoSource = isDarkMode ? require('../images/logo-black.png') : require('../images/logo-white.png');
 
   return (
     <View style={styles.container}>
@@ -20,6 +19,11 @@ function SplashScreen(): JSX.Element {
           </Text>
           <Text style={[isDarkMode ? styles.blackText : styles.whiteText, styles.heading]}>
             EASE
+          </Text>
+        </View>
+        <View style={styles.slogonView}>
+          <Text style={[isDarkMode ? styles.blackText : styles.whiteText, styles.slogon]}>
+            Simplifying Diabetes Management with AI Insights
           </Text>
         </View>
       </View>
@@ -50,11 +54,23 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     textContainer: {
-      flexDirection: 'row', // Arrange items horizontally
+      flexDirection: 'row', 
     },
     image: {
       width: 120,
       height: 160,
+    },
+    slogon: {
+      marginTop: 10,
+      // color: '#FFFFFF',
+      textAlign: 'center',
+      letterSpacing: 1,
+      lineHeight: 25,
+      fontWeight: 'bold',
+    },
+    slogonView: {
+      paddingLeft: 50,
+      paddingRight: 50,
     },
 });
 

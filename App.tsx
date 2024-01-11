@@ -118,15 +118,24 @@
 // export default App;
 
 import React from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+// import {View, Text, SafeAreaView} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SplashScreen from './src/screens/SplashScreen';
 
 const App = (): JSX.Element => {
+  const Stack = createNativeStackNavigator();
   return (
-    <SafeAreaView>
-      <View>
-        <Text>Hello World!</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{title: 'SplashScreen'}}
+        />
+        {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
