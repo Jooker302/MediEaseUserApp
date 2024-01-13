@@ -1,21 +1,9 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { useColorScheme, BackHandler } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import CustomButton from '../components/CustomButton';
 
-
-interface CustomButtonProps {
-  title: string;
-  onPress: () => void;
-}
-
-function CustomButton({ title, onPress }: CustomButtonProps) {
-  return (
-    <TouchableOpacity onPress={onPress} style={[styles.button]}>
-      <Text style={[styles.buttonText]}>{title}</Text>
-    </TouchableOpacity>
-  );
-}
 
 const RoleSelectScreen = () => {
   const navigation = useNavigation();
@@ -23,13 +11,13 @@ const RoleSelectScreen = () => {
   const logoSource = isDarkMode ? require('../images/logo-black.png') : require('../images/logo-white.png');
 
   const handleUserPress = () => {
-    console.log('User');
-    navigation.navigate('Login');
+    // console.log('User');
+    navigation.navigate('UserLogin');
   };
 
   const handleDoctorPress = () => {
-    console.log('Doctor');
-    navigation.navigate('Login');
+    // console.log('Doctor');
+    navigation.navigate('DoctorLogin');
   };
 
   useFocusEffect(

@@ -4,15 +4,13 @@ import { useState } from 'react';
 import CustomButton from '../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 
-const Register = () => {
+const UserLogin = () => {
   const navigation = useNavigation();
   const isDarkMode = useColorScheme() === 'dark';
   const logoSource = isDarkMode ? require('../images/logo-black.png') : require('../images/logo-white.png');
 
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleEmailChange = (inputText: any) => {
     setEmail(inputText);
@@ -22,27 +20,18 @@ const Register = () => {
     setPassword(inputText);
   };
 
-  const handleNameChange = (inputText: any) => {
-    setName(inputText);
-  };
-
-  const handleConfirmPasswordChange = (inputText: any) => {
-    setConfirmPassword(inputText);
-  };
-
-  const handleRegisterPress = () => {
+  const handleLoginPress = () => {
     navigation.navigate('UserHome');
   };
 
-  const handleLoginPress = () => {
-    navigation.navigate('UserLogin');
+  const handleRegisterPress = () => {
+    navigation.navigate('Register');
   }
 
 
   return (
-
-    <SafeAreaView >
-      <ScrollView >
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
       <View style={[styles.main, styles.container]}>
         <Image
           source={logoSource}
@@ -61,21 +50,12 @@ const Register = () => {
           <Text style={[styles.loginHeading, styles.whiteText]}>User Login</Text>
         </View>
         <View>
-        <View style={styles.inputView}>
-            <Text style={[styles.whiteText, styles.inputLabel]}>Name</Text>
-            <TextInput
-              style={[styles.input]}
-              placeholder=""
-              onChangeText={handleNameChange}
-              value={name}
-            />
-          </View>
           <View style={styles.inputView}>
             <Text style={[styles.whiteText, styles.inputLabel]}>Email</Text>
             <TextInput
               style={[styles.input]}
-              placeholder=""
-              onChangeText={handleNameChange}
+              placeholder="email@mail.com"
+              onChangeText={handleEmailChange}
               value={email}
             />
           </View>
@@ -83,37 +63,28 @@ const Register = () => {
             <Text style={[styles.whiteText, styles.inputLabel]}>Password</Text>
             <TextInput
               style={[styles.input]}
-              placeholder=""
+              placeholder="*********"
               onChangeText={handlePasswordChange}
               value={password}
               secureTextEntry={true}
             />
           </View>
-          <View style={styles.inputView}>
-            <Text style={[styles.whiteText, styles.inputLabel]}>Confirm Password</Text>
-            <TextInput
-              style={[styles.input]}
-              placeholder=""
-              onChangeText={handleConfirmPasswordChange}
-              value={confirmPassword}
-              secureTextEntry={true}
-            />
-          </View>
           <View style={styles.buttonView}>
             <CustomButton 
-            title="Register"
-            onPress={handleRegisterPress}
+            title="Login"
+            onPress={handleLoginPress}
             />
           </View>
         </View>
         <View>
-      <TouchableOpacity onPress={handleLoginPress}>
-        <Text style={styles.register}>Already have an account?</Text>
+      <TouchableOpacity onPress={handleRegisterPress}>
+        <Text style={styles.register}>Register Now</Text>
       </TouchableOpacity>
     </View>
       </View>
       </ScrollView>
     </SafeAreaView>
+    
   );
 }
 
@@ -123,7 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#04b1b2',
     padding: 30,
-    // paddingTop: 60,
+    paddingTop: 60,
   },
   main: {
     flex: 1,
@@ -184,4 +155,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Register;
+export default UserLogin;
