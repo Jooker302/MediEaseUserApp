@@ -45,7 +45,17 @@ const UserNavigator = () => {
       <Tab.Screen
         name="Home"
         component={UserHome}
-        options={{ headerShown: false }} 
+        options={{ 
+          headerStyle: {
+            backgroundColor: 'white', 
+          },
+          headerTintColor: '#04b1b2', 
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerTitle: 'Home', 
+        
+        }} 
       />
       <Tab.Screen
         name="Medical Record"
