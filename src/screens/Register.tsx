@@ -31,7 +31,7 @@ const Register = () => {
   };
 
   const handleRegisterPress = () => {
-    navigation.navigate('UserHome');
+    navigation.navigate('UserNavigator');
   };
 
   const handleLoginPress = () => {

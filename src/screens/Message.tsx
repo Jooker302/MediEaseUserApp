@@ -8,12 +8,12 @@ const Message = () => {
     const [contacts, setContacts] = useState([
         { id: '1', name: 'John Doe', lastMessage: 'Hello!', time: '12:30 PM' },
         { id: '2', name: 'Jane Smith', lastMessage: 'Hi there!', time: '11:45 AM' },
-        { id: '1', name: 'John Doe', lastMessage: 'Hello!', time: '12:30 PM' },
-        { id: '2', name: 'Jane Smith', lastMessage: 'Hi there!', time: '11:45 AM' },
-        { id: '1', name: 'John Doe', lastMessage: 'Hello!', time: '12:30 PM' },
-        { id: '2', name: 'Jane Smith', lastMessage: 'Hi there!', time: '11:45 AM' },
-        { id: '1', name: 'John Doe', lastMessage: 'Hello!', time: '12:30 PM' },
-        { id: '2', name: 'Jane Smith', lastMessage: 'Hi there!', time: '11:45 AM' },
+        { id: '11', name: 'John Doe', lastMessage: 'Hello!', time: '12:30 PM' },
+        { id: '21', name: 'Jane Smith', lastMessage: 'Hi there!', time: '11:45 AM' },
+        { id: '12', name: 'John Doe', lastMessage: 'Hello!', time: '12:30 PM' },
+        { id: '22', name: 'Jane Smith', lastMessage: 'Hi there!', time: '11:45 AM' },
+        { id: '13', name: 'John Doe', lastMessage: 'Hello!', time: '12:30 PM' },
+        { id: '23', name: 'Jane Smith', lastMessage: 'Hi there!', time: '11:45 AM' },
     ]);
 
     const renderItem = ({ item }: { item: any }) => (
@@ -37,16 +37,17 @@ const Message = () => {
     );
     return (
         <SafeAreaView style={styles.main}>
-            <ScrollView>
+            {/* <ScrollView> */}
                 <View style={styles.container}>
 
                     <FlatList
                         data={contacts}
                         keyExtractor={(item) => item.id}
                         renderItem={renderItem}
+                        scrollEnabled
                     />
                 </View>
-            </ScrollView>
+            {/* </ScrollView> */}
         </SafeAreaView>
     );
 };

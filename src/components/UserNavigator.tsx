@@ -4,10 +4,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import UserHome from '../screens/UserHome';
 import UserProfile from '../screens/UserProfile';
 import Message from '../screens/Message';
+import MedicalRecord from '../screens/MedicalRecord';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const UserNavigator = () => {
+
+  const navigation = useNavigation();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }: { route : any}) => ({
@@ -47,9 +53,9 @@ const UserNavigator = () => {
         component={UserHome}
         options={{ 
           headerStyle: {
-            backgroundColor: 'white', 
+            backgroundColor: '#04b1b2', 
           },
-          headerTintColor: '#04b1b2', 
+          headerTintColor: 'white', 
           headerTitleStyle: {
             fontWeight: 'bold',
           },
@@ -59,8 +65,27 @@ const UserNavigator = () => {
       />
       <Tab.Screen
         name="Medical Record"
-        component={UserHome}
-        options={{ headerShown: false }} 
+        component={MedicalRecord}
+        options={{ 
+          headerStyle: {
+            backgroundColor: 'white', 
+          },
+          headerTintColor: '#04b1b2', 
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerTitle: 'Records', 
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ marginRight: 15 }}
+              onPress={() => {
+                navigation.navigate('AddRecord');
+              }}
+            >
+              <Ionicons name="add" size={30} color="#04b1b2" />
+            </TouchableOpacity>
+          ),
+        }} 
       />
       <Tab.Screen
         name="Message"
