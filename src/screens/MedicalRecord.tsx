@@ -21,7 +21,7 @@ const MedicalRecord = () => {
     // You can navigate to a detail screen or show a modal with more information here
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item } : { item : any }) => (
     <TouchableOpacity onPress={() => handleRecordPress(item)} style={styles.medicalRecordItem}>
       <View style={styles.recordImageContainer}>
         <Image source={item.image} style={styles.recordImage} />

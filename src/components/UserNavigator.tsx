@@ -14,38 +14,42 @@ const UserNavigator = () => {
 
   const navigation = useNavigation();
 
+  const tabBarIcon = ({ focused, size, route }: { focused: boolean; size: number; route: any }) => {
+    let iconName: string = '';
+    let iconColor: string = focused ? '#04b1b2' : 'gray';
+  
+    const iconSize: number = size;
+    iconColor = focused ? '#04b1b2' : 'gray';
+    if (route.name === 'Home') {
+      iconName = focused ? 'home' : 'home-outline';
+    } else if (route.name === 'Profile') {
+      iconName = focused ? 'person-circle' : 'person-circle-outline';
+    } else if (route.name === 'Message') {
+      iconName = focused ? 'chatbubble' : 'chatbubble-outline';
+    } else if (route.name === 'Medical Record') {
+      iconName = focused ? 'document-lock' : 'document-lock-outline';
+    }
+  
+    // Set the iconName based on your logic
+  
+    return <Ionicons name={iconName} size={iconSize} color={iconColor} />;
+  };
+  
+
   return (
     <Tab.Navigator
-      screenOptions={({ route }: { route : any}) => ({
-          tabBarIcon: ({ focused, size }: { focused: string, size: string}) => {
-            let iconName: string;
-            let iconColor: string;
-            iconColor = focused ? '#04b1b2' : 'gray';
-            if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Profile') {
-              iconName = focused ? 'person-circle' : 'person-circle-outline';
-            } else if (route.name === 'Message') {
-              iconName = focused ? 'chatbubble' : 'chatbubble-outline';
-            }
-            else if (route.name === 'Medical Record') {
-              iconName = focused ? 'document-lock' : 'document-lock-outline';
-            }
-
-            return <Ionicons name={iconName} size={size} color={iconColor}/>;
-          },
-          tabBarStyle: {
-            position: 'absolute',
-            elevation: 0,
-            backgroundColor: 'white',
-            height: 70,
-          },
-          tabBarLabelStyle: {
-            
-          },
-          tabBarActiveTintColor: "#04b1b2",
-          tabBarInactiveTintColor: "gray",
-        })}
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, size }) => tabBarIcon({ focused, size, route }),
+      tabBarStyle: {
+        position: 'absolute',
+        elevation: 0,
+        backgroundColor: 'white',
+        height: 70,
+      },
+      tabBarLabelStyle: {},
+      tabBarActiveTintColor: '#04b1b2',
+      tabBarInactiveTintColor: 'gray',
+    })}
     >
 
       <Tab.Screen
@@ -79,7 +83,7 @@ const UserNavigator = () => {
             <TouchableOpacity
               style={{ marginRight: 15 }}
               onPress={() => {
-                navigation.navigate('AddRecord');
+                navigation.navigate('AddRecord' as never);
               }}
             >
               <Ionicons name="add" size={30} color="#04b1b2" />

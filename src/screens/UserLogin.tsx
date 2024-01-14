@@ -21,11 +21,11 @@ const UserLogin = () => {
   };
 
   const handleLoginPress = () => {
-    navigation.navigate('UserNavigator');
+    navigation.navigate('UserNavigator' as never);
   };
 
   const handleRegisterPress = () => {
-    navigation.navigate('Register');
+    navigation.navigate('Register' as never);
   };
 
 

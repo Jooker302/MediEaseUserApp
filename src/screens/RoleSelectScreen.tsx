@@ -12,12 +12,12 @@ const RoleSelectScreen = () => {
 
   const handleUserPress = () => {
     // console.log('User');
-    navigation.navigate('UserLogin');
+    navigation.navigate('UserLogin' as never);
   };
 
   const handleDoctorPress = () => {
     // console.log('Doctor');
-    navigation.navigate('DoctorLogin');
+    navigation.navigate('DoctorLogin' as never);
   };
 
   useFocusEffect(
