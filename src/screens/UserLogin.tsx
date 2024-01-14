@@ -21,12 +21,12 @@ const UserLogin = () => {
   };
 
   const handleLoginPress = () => {
-    navigation.navigate('UserHome');
+    navigation.navigate('UserNavigator');
   };
 
   const handleRegisterPress = () => {
     navigation.navigate('Register');
-  }
+  };
 
 
   return (

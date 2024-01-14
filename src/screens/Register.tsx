@@ -75,7 +75,7 @@ const Register = () => {
             <TextInput
               style={[styles.input]}
               placeholder=""
-              onChangeText={handleNameChange}
+              onChangeText={handleEmailChange}
               value={email}
             />
           </View>
