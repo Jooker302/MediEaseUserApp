@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
         color: '#04b1b2',
     },
     chatTime: {
+        // marginLeft: 40,
         fontSize: 12,
         // fontWeight: 'bold',
         color: '#04b1b2',
@@ -101,9 +102,11 @@ const styles = StyleSheet.create({
         color: '#04b1b2',
     },
     messageView: {
+        
         paddingLeft: 10,
     },
     chatHeaderRow: {
+        
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',

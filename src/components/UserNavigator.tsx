@@ -30,8 +30,6 @@ const UserNavigator = () => {
       iconName = focused ? 'document-lock' : 'document-lock-outline';
     }
   
-    // Set the iconName based on your logic
-  
     return <Ionicons name={iconName} size={iconSize} color={iconColor} />;
   };
   
