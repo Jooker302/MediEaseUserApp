@@ -3,6 +3,8 @@ import React from 'react';
 import { useState } from 'react';
 import CustomButton from '../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
+// import { AsyncStorage } from 'react-native';
 
 const UserLogin = () => {
   const navigation = useNavigation();
@@ -20,8 +22,43 @@ const UserLogin = () => {
     setPassword(inputText);
   };
 
-  const handleLoginPress = () => {
-    navigation.navigate('UserNavigator' as never);
+  const handleLoginPress = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    };
+
+    try {
+      const response = await fetch("https://mediease.vercel.app/api/auth/login", requestOptions);
+      const result = await response.json();
+  
+      if (response.ok) {
+        console.log(result.message); 
+        Alert.alert('Success', result.message);
+        // console.log(result.user.name);
+        // await AsyncStorage.setItem(
+        //   '@UserName:key',
+        //   result.user.name,
+        // );
+        navigation.navigate('UserNavigator' as never);
+      } else {
+        Alert.alert('Success', result.message);
+        console.log(result.message); 
+      }
+    } catch (error) {
+      // Alert.alert('Success', error.);
+      console.log('Error during registration:', error);
+    }
+    // navigation.navigate('UserNavigator' as never);
   };
 
   const handleRegisterPress = () => {
@@ -32,59 +69,59 @@ const UserLogin = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-      <View style={[styles.main, styles.container]}>
-        <Image
-          source={logoSource}
-          style={styles.image}
-          resizeMode="contain"
-        />
-        <View style={styles.textContainer}>
-          <Text style={[isDarkMode ? styles.whiteText : styles.blackText, styles.heading]}>
-            MEDI
-          </Text>
-          <Text style={[isDarkMode ? styles.blackText : styles.whiteText, styles.heading]}>
-            EASE
-          </Text>
-        </View>
-        <View style={[styles.loginView]}>
-          <Text style={[styles.loginHeading, styles.whiteText]}>User Login</Text>
-        </View>
-        <View>
-          <View style={styles.inputView}>
-            <Text style={[styles.whiteText, styles.inputLabel]}>Email</Text>
-            <TextInput
-              style={[styles.input]}
-              placeholder="email@mail.com"
-              onChangeText={handleEmailChange}
-              value={email}
-            />
+        <View style={[styles.main, styles.container]}>
+          <Image
+            source={logoSource}
+            style={styles.image}
+            resizeMode="contain"
+          />
+          <View style={styles.textContainer}>
+            <Text style={[isDarkMode ? styles.whiteText : styles.blackText, styles.heading]}>
+              MEDI
+            </Text>
+            <Text style={[isDarkMode ? styles.blackText : styles.whiteText, styles.heading]}>
+              EASE
+            </Text>
           </View>
-          <View style={styles.inputView}>
-            <Text style={[styles.whiteText, styles.inputLabel]}>Password</Text>
-            <TextInput
-              style={[styles.input]}
-              placeholder="*********"
-              onChangeText={handlePasswordChange}
-              value={password}
-              secureTextEntry={true}
-            />
+          <View style={[styles.loginView]}>
+            <Text style={[styles.loginHeading, styles.whiteText]}>User Login</Text>
           </View>
-          <View style={styles.buttonView}>
-            <CustomButton 
-            title="Login"
-            onPress={handleLoginPress}
-            />
+          <View>
+            <View style={styles.inputView}>
+              <Text style={[styles.whiteText, styles.inputLabel]}>Email</Text>
+              <TextInput
+                style={[styles.input]}
+                placeholder="email@mail.com"
+                onChangeText={handleEmailChange}
+                value={email}
+              />
+            </View>
+            <View style={styles.inputView}>
+              <Text style={[styles.whiteText, styles.inputLabel]}>Password</Text>
+              <TextInput
+                style={[styles.input]}
+                placeholder="*********"
+                onChangeText={handlePasswordChange}
+                value={password}
+                secureTextEntry={true}
+              />
+            </View>
+            <View style={styles.buttonView}>
+              <CustomButton
+                title="Login"
+                onPress={handleLoginPress}
+              />
+            </View>
+          </View>
+          <View>
+            <TouchableOpacity onPress={handleRegisterPress}>
+              <Text style={styles.register}>Register Now</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View>
-      <TouchableOpacity onPress={handleRegisterPress}>
-        <Text style={styles.register}>Register Now</Text>
-      </TouchableOpacity>
-    </View>
-      </View>
       </ScrollView>
     </SafeAreaView>
-    
+
   );
 }
 

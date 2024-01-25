@@ -134,9 +134,11 @@ const Register = () => {
         Alert.alert('Success', result.message);
         navigation.navigate('UserLogin' as never);
       } else {
+        Alert.alert('Success', result.message);
         console.log(result.message); 
       }
     } catch (error) {
+      // Alert.alert('Success', error.);
       console.log('Error during registration:', error);
     }
   };

@@ -1,10 +1,22 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image, BackHandler } from 'react-native'
 import React from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
 const UserHome = () => {
   const medicineImage = require('../images/medicine.png')
   const foodImage = require('../images/burger.png')
   const exerciseImage = require('../images/exercise.png')
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        BackHandler.exitApp();
+        return true;
+      };
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
 
   return (
     <View style={styles.mainView}>

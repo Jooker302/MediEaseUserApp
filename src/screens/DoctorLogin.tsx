@@ -21,7 +21,7 @@ const DoctorLogin = () => {
     };
 
     const handleLoginPress = () => {
-        navigation.navigate('DoctorHome');
+        navigation.navigate('UserNavigator' as never);
     };
 
 
