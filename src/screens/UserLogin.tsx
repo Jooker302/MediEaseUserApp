@@ -4,6 +4,9 @@ import { useState } from 'react';
 import CustomButton from '../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import Toast from 'react-native-toast-message';
+
 // import { AsyncStorage } from 'react-native';
 
 const UserLogin = () => {
@@ -13,6 +16,7 @@ const UserLogin = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (inputText: any) => {
     setEmail(inputText);
@@ -23,6 +27,7 @@ const UserLogin = () => {
   };
 
   const handleLoginPress = async () => {
+    setLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -38,25 +43,35 @@ const UserLogin = () => {
     };
 
     try {
-      const response = await fetch("https://mediease.vercel.app/api/auth/login", requestOptions);
+      // const response = await fetch("https://mediease.vercel.app/api/auth/login", requestOptions);
+      const response = await fetch("http://192.168.18.15:3000/api/auth/login", requestOptions);
+
       const result = await response.json();
   
       if (response.ok) {
         console.log(result.message); 
-        Alert.alert('Success', result.message);
-        // console.log(result.user.name);
-        // await AsyncStorage.setItem(
-        //   '@UserName:key',
-        //   result.user.name,
-        // );
+        // Alert.alert('Success', result.message);
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: result.message,
+        });
+ 
         navigation.navigate('UserNavigator' as never);
       } else {
-        Alert.alert('Success', result.message);
+        // Alert.alert('Success', result.message);
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: result.message,
+        });
         console.log(result.message); 
       }
     } catch (error) {
       // Alert.alert('Success', error.);
       console.log('Error during registration:', error);
+    }finally {
+      setLoading(false); // Set loading back to false after request completes
     }
     // navigation.navigate('UserNavigator' as never);
   };
@@ -69,7 +84,11 @@ const UserLogin = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={[styles.main, styles.container]}>
+        
+        {loading ? (
+          <ActivityIndicator style={styles.loader} size="large" color="#ffffff" />
+        ) : (
+          <View style={[styles.main, styles.container]}>
           <Image
             source={logoSource}
             style={styles.image}
@@ -117,8 +136,11 @@ const UserLogin = () => {
             <TouchableOpacity onPress={handleRegisterPress}>
               <Text style={styles.register}>Register Now</Text>
             </TouchableOpacity>
+
           </View>
-        </View>
+          </View>
+        )}
+
       </ScrollView>
     </SafeAreaView>
 
@@ -131,7 +153,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#04b1b2',
     padding: 30,
-    paddingTop: 60,
+    paddingTop: 55,
   },
   main: {
     flex: 1,
@@ -140,7 +162,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 120,
-    height: 160,
+    height: 100,
   },
   whiteText: {
     color: '#FFFFFF',
@@ -189,6 +211,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textDecorationLine: 'underline',
   },
+  loader: {
+    marginVertical: 280,
+  }
 });
 
 

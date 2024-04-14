@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 // import RadioButton from 'react-native-paper/lib/typescript/components/RadioButton/RadioButton';
 import { RadioButton } from 'react-native-paper';
 import { Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 
 
@@ -57,13 +58,23 @@ const Register = () => {
 
     if (!name) {
       console.log('Please enter your name.');
-      Alert.alert('Error', 'Please enter your name.');
+      // Alert.alert('Error', 'Please enter your name.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter your name.',
+      });
       return;
     }
 
     if (!email) {
       console.log('Please enter your email.');
-      Alert.alert('Error', 'Please enter your email.');
+      // Alert.alert('Error', 'Please enter your email.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter your email.',
+      });
       return;
     }
 
@@ -71,31 +82,56 @@ const Register = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       // console.log('Invalid email format.');
-      Alert.alert('Error', 'Invalid email format.');
+      // Alert.alert('Error', 'Invalid email format.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Invalid email format.',
+      });
       return;
     }
 
     if (!password) {
       // console.log('Please enter a password.');
-      Alert.alert('Error', 'Please enter a password.');
+      // Alert.alert('Error', 'Please enter a password.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter your password.',
+      });
       return;
     }
 
     if (password.length < 6) {
-      Alert.alert('Error', 'Password must be at least 6 characters long.');
+      // Alert.alert('Error', 'Password must be at least 6 characters long.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Password must be at least 6 characters long.',
+      });
       // console.log('Password must be at least 6 characters long.');
       return;
     }
 
     if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match.');
+      // Alert.alert('Error', 'Passwords do not match.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Passwords do not match.',
+      });
       // console.log('Passwords do not match.');
       return;
     }
 
     if (!age) {
       // console.log('Please enter your age.');
-      Alert.alert('Error', 'Please enter your age.');
+      // Alert.alert('Error', 'Please enter your age.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter your age.',
+      });
 
       return;
     }
@@ -104,7 +140,12 @@ const Register = () => {
     const ageNumber = parseInt(age, 10);
     if (isNaN(ageNumber) || ageNumber <= 0) {
       // console.log('Please enter a valid age.');
-      Alert.alert('Error', 'Please enter a valid age.');
+      // Alert.alert('Error', 'Please enter a valid age.');
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Please enter a valid age.',
+      });
       return;
     }
 
@@ -131,10 +172,20 @@ const Register = () => {
   
       if (response.ok) {
         console.log(result.message); 
-        Alert.alert('Success', result.message);
+        // Alert.alert('Success', result.message);
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: result.message,
+        });
         navigation.navigate('UserLogin' as never);
       } else {
-        Alert.alert('Success', result.message);
+        // Alert.alert('Success', result.message);
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: result.message,
+        });
         console.log(result.message); 
       }
     } catch (error) {
@@ -271,7 +322,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 120,
-    height: 160,
+    height: 100,
   },
   whiteText: {
     color: '#FFFFFF',

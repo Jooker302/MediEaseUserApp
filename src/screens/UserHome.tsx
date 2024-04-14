@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image, BackHandler } from 'react-native'
 import React from 'react'
 import { useFocusEffect } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 
 const UserHome = () => {
+  const navigation = useNavigation();
   const medicineImage = require('../images/medicine.png')
   const foodImage = require('../images/burger.png')
   const exerciseImage = require('../images/exercise.png')
@@ -18,18 +20,22 @@ const UserHome = () => {
     }, [])
   );
 
+  const handlPredictionePress = () => {
+    navigation.navigate('UserPrediction' as never);
+  };
+
   return (
     <View style={styles.mainView}>
       <SafeAreaView>
         <ScrollView>
           <Text style={styles.homeTitle}>EXPLORE</Text>
           <View>
-            <TouchableOpacity style={[styles.homeBox, styles.homeYellow]}>
+            <TouchableOpacity style={[styles.homeBox, styles.homeYellow]} onPress={handlPredictionePress}>
               <Image
                 source={medicineImage}
                 style={styles.profileImage}
               />
-              <Text style={styles.homeBoxText}>Medicine</Text>
+              <Text style={styles.homeBoxText}>Prediction</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.homeBox, styles.homeGreen]}>
               <Image
@@ -56,7 +62,7 @@ export default UserHome
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F3F4F6',
     flex: 1,
   },
   profileImage: {
@@ -75,19 +81,19 @@ const styles = StyleSheet.create({
 
   },
   homeGreen: {
-    backgroundColor: '#C1F2B0',
+    backgroundColor: '#c1e1c1',
   },
   homeRed: {
-    backgroundColor: '#FF004D',
+    backgroundColor: '#ffc0cb',
   },
   homeYellow: {
-    backgroundColor: '#FAEF5D',
+    backgroundColor: '#fff8dc',
   },
   homeBoxText: {
     paddingHorizontal: 20,
     fontSize: 18,
     fontWeight: '700',
-    color: '#000000'
+    color: '#333'
   },
   homeTitle: {
     color: '#000000',
