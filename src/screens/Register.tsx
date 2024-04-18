@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
+import { BASE_URL } from '../constants';
 
 
 
@@ -167,7 +168,7 @@ const Register = () => {
     };
 
     try {
-      const response = await fetch("https://mediease.vercel.app/api/auth/register", requestOptions);
+      const response = await fetch(BASE_URL+"/api/auth/register", requestOptions);
       const result = await response.json();
   
       if (response.ok) {

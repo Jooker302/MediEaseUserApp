@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
 import { ActivityIndicator } from 'react-native';
 import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BASE_URL } from '../constants';
 
 // import { AsyncStorage } from 'react-native';
 
@@ -44,12 +46,17 @@ const UserLogin = () => {
 
     try {
       // const response = await fetch("https://mediease.vercel.app/api/auth/login", requestOptions);
-      const response = await fetch("http://192.168.18.15:3000/api/auth/login", requestOptions);
+      // const response = await fetch(process.env.API_URL+":3000/api/auth/login", requestOptions);
+      var api =  BASE_URL + '/api/auth/login';
+      console.log("", api);
+      const response = await fetch(api, requestOptions);
+
 
       const result = await response.json();
   
       if (response.ok) {
-        console.log(result.message); 
+        await AsyncStorage.setItem('userId', result.user._id);
+        // console.log(result.user._id); 
         // Alert.alert('Success', result.message);
         Toast.show({
           type: 'success',

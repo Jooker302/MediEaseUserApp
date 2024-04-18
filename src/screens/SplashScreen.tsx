@@ -10,7 +10,7 @@ function SplashScreen(): JSX.Element {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate('RoleSelectScreen');
+      navigation.navigate('RoleSelectScreen' as never);
     }, 2000);
 
     return () => clearTimeout(timer);

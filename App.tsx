@@ -12,6 +12,7 @@ import UserNavigator from './src/components/UserNavigator';
 import UserPredication from './src/screens/UserPredication';
 import Toast from 'react-native-toast-message';
 import { useRef }from 'react';
+import AddReport from './src/screens/AddReport';
 
 const ForwardedToast = forwardRef((props: any, ref: any) => {
   useImperativeHandle(ref, () => ({
@@ -84,6 +85,20 @@ const App = (): JSX.Element => {
               fontWeight: 'bold',
             },
             headerTitle: 'Predictions', 
+           }} 
+        />
+        <Stack.Screen
+          name="AddRecord"
+          component={AddReport}
+          options={{ headerShown: true,
+            headerStyle: {
+              backgroundColor: '#fff', 
+            },
+            headerTintColor: '#04b1b2', 
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitle: 'Add Report', 
            }} 
         />
       </Stack.Navigator>
