@@ -10,6 +10,8 @@ import UserHome from './src/screens/UserHome';
 import DcotorHome from './src/screens/DcotorHome';
 import UserNavigator from './src/components/UserNavigator';
 import UserPredication from './src/screens/UserPredication';
+import UserExercise from './src/screens/UserExercise';
+import UserFood from './src/screens/UserFood';
 import Toast from 'react-native-toast-message';
 import { useRef }from 'react';
 import AddReport from './src/screens/AddReport';
@@ -78,13 +80,41 @@ const App = (): JSX.Element => {
           component={UserPredication}
           options={{ headerShown: true,
             headerStyle: {
-              backgroundColor: '#fff8dc', 
+              backgroundColor: '#fff', 
             },
             headerTintColor: '#04b1b2', 
             headerTitleStyle: {
               fontWeight: 'bold',
             },
             headerTitle: 'Predictions', 
+           }} 
+        />
+        <Stack.Screen
+          name="UserExercise"
+          component={UserExercise}
+          options={{ headerShown: true,
+            headerStyle: {
+              backgroundColor: '#fff', 
+            },
+            headerTintColor: '#04b1b2', 
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitle: 'Exercise', 
+           }} 
+        />
+        <Stack.Screen
+          name="UserFood"
+          component={UserFood}
+          options={{ headerShown: true,
+            headerStyle: {
+              backgroundColor: '#fff', 
+            },
+            headerTintColor: '#04b1b2', 
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitle: 'Food', 
            }} 
         />
         <Stack.Screen

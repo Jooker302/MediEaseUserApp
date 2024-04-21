@@ -6,6 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BASE_URL } from '../constants';
 
 
 
@@ -45,7 +46,7 @@ const AddReport = () => {
         smoking_history_not_current: smokingHistory === 'smoking_history_not_current' ? 1 : 0,
       };
   
-      fetch('http://192.168.18.62:3000/api/user_report/ user_add_report', {
+      fetch(BASE_URL+'/api/user_report/ user_add_report', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

@@ -24,6 +24,14 @@ const UserHome = () => {
     navigation.navigate('UserPrediction' as never);
   };
 
+  const handleExcercisePress = () => {
+    navigation.navigate('UserExercise' as never);
+  };
+
+  const handleFoodPress = () => {
+    navigation.navigate('UserFood' as never);
+  };
+
   return (
     <View style={styles.mainView}>
       <SafeAreaView>
@@ -37,14 +45,14 @@ const UserHome = () => {
               />
               <Text style={styles.homeBoxText}>Prediction</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.homeBox, styles.homeGreen]}>
+            <TouchableOpacity style={[styles.homeBox, styles.homeGreen]} onPress={handleFoodPress}>
               <Image
                 source={foodImage}
                 style={styles.profileImage}
               />
               <Text style={styles.homeBoxText}>Food</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.homeBox, styles.homeRed]}>
+            <TouchableOpacity style={[styles.homeBox, styles.homeRed]}  onPress={handleExcercisePress}>
               <Image
                 source={exerciseImage}
                 style={styles.profileImage}
