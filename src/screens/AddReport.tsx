@@ -46,7 +46,7 @@ const AddReport = () => {
         smoking_history_not_current: smokingHistory === 'smoking_history_not_current' ? 1 : 0,
       };
   
-      fetch(BASE_URL+'/api/user_report/ user_add_report', {
+      fetch(BASE_URL+'/api/user_report/user_add_report', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

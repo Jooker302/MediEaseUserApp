@@ -4,27 +4,19 @@ import { useState, useEffect } from 'react';
 import { BASE_URL } from '../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../components/CustomButton';
-import { useNavigation, NavigationProp  } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-type RootStackParamList = {
-    RequestDoctor: undefined;
-    ChatScreen: { chat: any };
-};
-
-const Message = () => {
-    // const navigation = useNavigation();
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+const DoctorMessage = () => {
+    const navigation = useNavigation();
     const defaultImage = require('../images/default_user_profile.jpg');
     const [chats, setChats] = useState([]);
     const [loading, setLoading] = useState(true);
-    
-    
 
     useEffect(() => {
         const fetchChats = async () => {
             try {
                 const userId = await AsyncStorage.getItem('userId');
-                const api = `${BASE_URL}/api/chat/get-appointment/`;
+                const api = BASE_URL + '/api/chat/get-appointment/';
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
 
@@ -38,13 +30,13 @@ const Message = () => {
 
                 const response = await fetch(api, requestOptions);
                 const data = await response.json();
-
+                // console.log("", data.data);
                 if (data.message === 'No appointment found') {
                     setChats([]);
                 } else {
-                    // Handle the case where data.data is an object instead of an array
-                    const chatData = Array.isArray(data.data) ? data.data : [data.data];
-                    setChats(chatData);
+                    // console.log("", data);
+                    setChats(data.data);
+                    // console.log(chats);
                 }
                 setLoading(false);
             } catch (error) {
@@ -60,12 +52,8 @@ const Message = () => {
         navigation.navigate('RequestDoctor' as never);
     }
 
-    const handleChatPress = (chat: any) => {
-        navigation.navigate('ChatScreen', { chat });
-    };
-
     const renderItem = ({ item }: { item: any }) => (
-        <TouchableOpacity style={styles.contactItem} onPress={() => handleChatPress(item)}>
+        <TouchableOpacity style={styles.contactItem}>
             <View style={styles.chatView}>
                 <Image
                     source={defaultImage}
@@ -73,11 +61,10 @@ const Message = () => {
                 />
                 <View style={styles.messageView}>
                     <View style={styles.chatHeaderRow}>
-                        <Text style={styles.chatHeader}>{item.doctor_name || 'No Doctor Assigned Yet'}</Text>
+                        <Text style={styles.chatHeader}>{item.doctor_name}</Text>
+                        <Text style={styles.chatTime}>{item.created_at}</Text>
                     </View>
-                    <Text style={styles.chatTime}>{item.created_at}</Text>
-
-                    {/* <Text style={styles.chatMessage}>{item.lastMessage || 'No messages yet'}</Text> */}
+                    <Text style={styles.chatMessage}>{item.lastMessage}</Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -85,6 +72,9 @@ const Message = () => {
 
     return (
         <SafeAreaView style={styles.main}>
+            {/* <View style={styles.header}>
+                <Text style={styles.headerText}>Messages</Text>
+            </View> */}
             <View style={styles.container}>
                 {loading ? (
                     <ActivityIndicator style={styles.loader} size="large" color="#ffffff" />
@@ -111,7 +101,7 @@ const Message = () => {
     );
 };
 
-export default Message;
+export default DoctorMessage;
 
 const styles = StyleSheet.create({
     main: {
@@ -122,6 +112,23 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#04b1b2',
         flex: 1,
+    },
+    header: {
+        backgroundColor: '#04b1b2',
+        padding: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#FFFFFF',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    headerText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#FFFFFF',
     },
     chatView: {
         flexDirection: 'row',

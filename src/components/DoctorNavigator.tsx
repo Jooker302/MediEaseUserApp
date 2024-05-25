@@ -11,11 +11,9 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator(); // Create stack navigator for UserPrediction screen
 
-const UserNavigator = () => {
+const DoctorNavigator = () => {
 
-  const navigation = useNavigation();
 
   const tabBarIcon = ({ focused, size, route }: { focused: boolean; size: number; route: any }) => {
     let iconName: string = '';
@@ -23,15 +21,11 @@ const UserNavigator = () => {
   
     const iconSize: number = size;
     iconColor = focused ? '#04b1b2' : 'gray';
-    if (route.name === 'Home' || route.name === 'User Prediction') {
-      iconName = focused ? 'home' : 'home-outline';
-    } else if (route.name === 'Profile') {
+    if (route.name === 'Profile') {
       iconName = focused ? 'person-circle' : 'person-circle-outline';
     } else if (route.name === 'Message') {
       iconName = focused ? 'chatbubble' : 'chatbubble-outline';
-    } else if (route.name === 'Medical Record') {
-      iconName = focused ? 'document-lock' : 'document-lock-outline';
-    }
+    } 
   
     return <Ionicons name={iconName} size={iconSize} color={iconColor} />;
   };
@@ -53,7 +47,7 @@ const UserNavigator = () => {
     })}
     >
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Home"
         component={UserHome}
         options={{ 
@@ -67,8 +61,8 @@ const UserNavigator = () => {
           headerTitle: 'Home', 
         
         }} 
-      />
-      <Tab.Screen
+      /> */}
+      {/* <Tab.Screen
         name="Medical Record"
         component={MedicalRecord}
         options={{ 
@@ -91,7 +85,7 @@ const UserNavigator = () => {
             </TouchableOpacity>
           ),
         }} 
-      />
+      /> */}
       <Tab.Screen
         name="Message"
         component={Message}
@@ -119,4 +113,4 @@ const UserNavigator = () => {
   );
 };
 
-export default UserNavigator;
+export default DoctorNavigator;

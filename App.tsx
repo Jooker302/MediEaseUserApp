@@ -9,12 +9,17 @@ import DoctorLogin from './src/screens/DoctorLogin';
 import UserHome from './src/screens/UserHome';
 import DcotorHome from './src/screens/DcotorHome';
 import UserNavigator from './src/components/UserNavigator';
+import DoctorNavigator from './src/components/DoctorNavigator';
 import UserPredication from './src/screens/UserPredication';
 import UserExercise from './src/screens/UserExercise';
 import UserFood from './src/screens/UserFood';
 import Toast from 'react-native-toast-message';
 import { useRef }from 'react';
 import AddReport from './src/screens/AddReport';
+import RequestDoctor from './src/screens/RequestDoctor';
+import ChatScreen from './src/screens/ChatScreen';
+
+
 
 const ForwardedToast = forwardRef((props: any, ref: any) => {
   useImperativeHandle(ref, () => ({
@@ -69,6 +74,11 @@ const App = (): JSX.Element => {
           name="UserHome"
           component={UserHome}
           options={{ title: 'UserHome', headerShown: false }}
+        />
+        <Stack.Screen
+          name="DoctorNavigator"
+          component={DoctorNavigator}
+          options={{ headerShown: false }} 
         />
         <Stack.Screen
           name="UserNavigator"
@@ -129,6 +139,34 @@ const App = (): JSX.Element => {
               fontWeight: 'bold',
             },
             headerTitle: 'Add Report', 
+           }} 
+        />
+        <Stack.Screen
+          name="RequestDoctor"
+          component={RequestDoctor}
+          options={{ headerShown: true,
+            headerStyle: {
+              backgroundColor: '#fff', 
+            },
+            headerTintColor: '#04b1b2', 
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitle: 'Request Doctor', 
+           }} 
+        />
+        <Stack.Screen
+          name="ChatScreen"
+          component={ChatScreen}
+          options={{ headerShown: true,
+            headerStyle: {
+              backgroundColor: '#fff', 
+            },
+            headerTintColor: '#04b1b2', 
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitle: 'Chat', 
            }} 
         />
       </Stack.Navigator>
