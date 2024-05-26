@@ -18,6 +18,7 @@ import { useRef }from 'react';
 import AddReport from './src/screens/AddReport';
 import RequestDoctor from './src/screens/RequestDoctor';
 import ChatScreen from './src/screens/ChatScreen';
+import SingleReport from './src/screens/SingleReport';
 
 
 
@@ -167,6 +168,20 @@ const App = (): JSX.Element => {
               fontWeight: 'bold',
             },
             headerTitle: 'Chat', 
+           }} 
+        />
+        <Stack.Screen
+          name="SingleReport"
+          component={SingleReport}
+          options={{ headerShown: true,
+            headerStyle: {
+              backgroundColor: '#fff', 
+            },
+            headerTintColor: '#04b1b2', 
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitle: 'Report', 
            }} 
         />
       </Stack.Navigator>

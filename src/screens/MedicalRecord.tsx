@@ -6,8 +6,16 @@ import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react
 import { ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from '../constants';
+import { useNavigation, NavigationProp  } from '@react-navigation/native';
+
+
+type RootStackParamList = {
+  // RequestDoctor: undefined;
+  SingleReport: { id: any };
+};
 
 const MedicalRecord = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [loading, setLoading] = useState(true);
   const [medicalRecords, setMedicalRecords] = useState([]);
   const img = require('../images/default_user_profile.jpg');
@@ -44,14 +52,14 @@ const MedicalRecord = () => {
 
   
 
-  const handleRecordPress = (item : any) => {
+  const handleRecordPress = (id : any) => {
     // Handle the press event for the medical record item
-    console.log('View details for:', item.id);
+    navigation.navigate('SingleReport', { id });
     // You can navigate to a detail screen or show a modal with more information here
   };
 
   const renderItem = ({ item } : { item : any }) => (
-    <TouchableOpacity onPress={() => handleRecordPress(item)} style={styles.medicalRecordItem}>
+    <TouchableOpacity onPress={() => handleRecordPress(item.id)} style={styles.medicalRecordItem}>
       <View style={styles.recordImageContainer}>
         {/* <Image source={item.image} style={styles.recordImage} /> */}
         <Image source={img} style={styles.recordImage} />
