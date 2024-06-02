@@ -55,6 +55,23 @@ const UserLogin = () => {
       const result = await response.json();
   
       if (response.ok) {
+
+        if(result.user.role === 'Doctor'){
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'Login through Doctor Panel',
+          });
+          return;
+        }else if(result.user.role === 'Admin'){
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'Login through Web Portal',
+          });
+          return;
+        }
+
         await AsyncStorage.setItem('userId', result.user._id);
         // console.log(result.user._id); 
         // Alert.alert('Success', result.message);
@@ -75,6 +92,11 @@ const UserLogin = () => {
         console.log(result.message); 
       }
     } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Error during registration:'+ error,
+      });
       // Alert.alert('Success', error.);
       console.log('Error during registration:', error);
     }finally {

@@ -7,8 +7,10 @@ import { RadioButton } from 'react-native-paper';
 import { BASE_URL } from '../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
+import { useNavigation  } from '@react-navigation/native';
 
 const UserProfile = () => {
+    const navigation = useNavigation();
     const defaultImage = require('../images/default_user_profile.jpg');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -137,6 +139,10 @@ const UserProfile = () => {
         fetchUserProfile();
     }, []);
 
+    const handleLogout = () => {
+        navigation.navigate('RoleSelectScreen' as never);
+    }
+
     const fetchUserProfile = async () => {
         try {
             // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL to fetch user profile data
@@ -237,6 +243,12 @@ const UserProfile = () => {
                                     onPress={handleUpdatePress}
                                 />
                             </View>
+                            <View style={styles.buttonViewLogout}>
+                                <CustomButton
+                                    title="Logout"
+                                    onPress={handleLogout}
+                                />
+                            </View>
                         </View>
                     </View>
 
@@ -295,6 +307,9 @@ const styles = StyleSheet.create({
     },
     buttonView: {
         paddingTop: 20,
+    },
+    buttonViewLogout: {
+        // paddingTop: 1,
     },
     imageContainer: {
         marginTop: 20,

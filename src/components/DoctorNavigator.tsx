@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import UserHome from '../screens/UserHome';
 import UserProfile from '../screens/UserProfile';
-import Message from '../screens/Message';
+import DoctorMessage from '../screens/DoctorMessage';
 import UserPredication from '../screens/UserPredication';
 import MedicalRecord from '../screens/MedicalRecord';
 import { TouchableOpacity } from 'react-native';
@@ -23,7 +23,7 @@ const DoctorNavigator = () => {
     iconColor = focused ? '#04b1b2' : 'gray';
     if (route.name === 'Profile') {
       iconName = focused ? 'person-circle' : 'person-circle-outline';
-    } else if (route.name === 'Message') {
+    } else if (route.name === 'DoctorMessage') {
       iconName = focused ? 'chatbubble' : 'chatbubble-outline';
     } 
   
@@ -87,8 +87,8 @@ const DoctorNavigator = () => {
         }} 
       /> */}
       <Tab.Screen
-        name="Message"
-        component={Message}
+        name="DoctorMessage"
+        component={DoctorMessage}
         options={{ 
           headerStyle: {
             backgroundColor: '#04b1b2', 

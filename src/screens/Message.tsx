@@ -39,7 +39,7 @@ const Message = () => {
                 const response = await fetch(api, requestOptions);
                 const data = await response.json();
 
-                if (data.message === 'No appointment found') {
+                if (data.message === 'No appointments found') {
                     setChats([]);
                 } else {
                     // Handle the case where data.data is an object instead of an array
@@ -57,6 +57,8 @@ const Message = () => {
     }, []);
 
     const handleRequestPress = () => {
+        // console.log(chats);
+        
         navigation.navigate('RequestDoctor' as never);
     }
 
@@ -89,6 +91,7 @@ const Message = () => {
                 {loading ? (
                     <ActivityIndicator style={styles.loader} size="large" color="#ffffff" />
                 ) : (
+                    chats ? (
                     chats.length > 0 ? (
                         <FlatList
                             data={chats}
@@ -105,6 +108,15 @@ const Message = () => {
                             />
                         </View>
                     )
+                ) : (
+                    <View style={styles.noChats}>
+                        <Text style={styles.noChatsText}>No doctor assigned</Text>
+                        <CustomButton
+                            title="Request Chat with Doctor"
+                            onPress={handleRequestPress}
+                        />
+                    </View>
+                )
                 )}
             </View>
         </SafeAreaView>

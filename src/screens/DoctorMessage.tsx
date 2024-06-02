@@ -4,10 +4,15 @@ import { useState, useEffect } from 'react';
 import { BASE_URL } from '../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../components/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+
+type RootStackParamList = {
+    RequestDoctor: undefined;
+    ChatScreen: { chat: any };
+};
 
 const DoctorMessage = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const defaultImage = require('../images/default_user_profile.jpg');
     const [chats, setChats] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -16,7 +21,8 @@ const DoctorMessage = () => {
         const fetchChats = async () => {
             try {
                 const userId = await AsyncStorage.getItem('userId');
-                const api = BASE_URL + '/api/chat/get-appointment/';
+                console.log(userId);
+                const api = BASE_URL + '/api/chat/doctor-apis/get-appointments';
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
 
@@ -24,19 +30,16 @@ const DoctorMessage = () => {
                     method: 'POST',
                     headers: myHeaders,
                     body: JSON.stringify({
-                        user_id: userId,
+                        doctor_id: userId,
                     }),
                 };
 
                 const response = await fetch(api, requestOptions);
                 const data = await response.json();
-                // console.log("", data.data);
-                if (data.message === 'No appointment found') {
+                if (data.message === 'No appointments found') {
                     setChats([]);
                 } else {
-                    // console.log("", data);
                     setChats(data.data);
-                    // console.log(chats);
                 }
                 setLoading(false);
             } catch (error) {
@@ -48,33 +51,36 @@ const DoctorMessage = () => {
         fetchChats();
     }, []);
 
-    const handleRequestPress = () => {
-        navigation.navigate('RequestDoctor' as never);
-    }
+    const handleChatPress = (chat: any) => {
+        navigation.navigate('ChatScreen', { chat });
+    };
 
-    const renderItem = ({ item }: { item: any }) => (
-        <TouchableOpacity style={styles.contactItem}>
-            <View style={styles.chatView}>
-                <Image
-                    source={defaultImage}
-                    style={styles.profileImage}
-                />
-                <View style={styles.messageView}>
-                    <View style={styles.chatHeaderRow}>
-                        <Text style={styles.chatHeader}>{item.doctor_name}</Text>
-                        <Text style={styles.chatTime}>{item.created_at}</Text>
+    const renderItem = ({ item }: { item: any }) => {
+        const userImage = item.user_image 
+            ? { uri: `${item.user_image}` }
+            : defaultImage;
+
+        return (
+            <TouchableOpacity style={styles.contactItem} onPress={() => handleChatPress(item)}>
+                <View style={styles.chatView}>
+                    <Image
+                        source={userImage}
+                        style={styles.profileImage}
+                    />
+                    <View style={styles.messageView}>
+                        <View style={styles.chatHeaderRow}>
+                            <Text style={styles.chatHeader}>{item.user_name}</Text>
+                            <Text style={styles.chatTime}>{item.created_at}</Text>
+                        </View>
+                        <Text style={styles.chatMessage}>{item.lastMessage}</Text>
                     </View>
-                    <Text style={styles.chatMessage}>{item.lastMessage}</Text>
                 </View>
-            </View>
-        </TouchableOpacity>
-    );
+            </TouchableOpacity>
+        );
+    };
 
     return (
         <SafeAreaView style={styles.main}>
-            {/* <View style={styles.header}>
-                <Text style={styles.headerText}>Messages</Text>
-            </View> */}
             <View style={styles.container}>
                 {loading ? (
                     <ActivityIndicator style={styles.loader} size="large" color="#ffffff" />
@@ -88,11 +94,7 @@ const DoctorMessage = () => {
                         />
                     ) : (
                         <View style={styles.noChats}>
-                            <Text style={styles.noChatsText}>No doctor assigned</Text>
-                            <CustomButton
-                                title="Request Chat with Doctor"
-                                onPress={handleRequestPress}
-                            />
+                            <Text style={styles.noChatsText}>No Patients assigned</Text>
                         </View>
                     )
                 )}

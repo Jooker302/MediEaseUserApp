@@ -55,9 +55,27 @@ const DoctorLogin = () => {
       const result = await response.json();
   
       if (response.ok) {
+
+        if(result.user.role === 'Patient'){
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'Login through Pateint Panel',
+          });
+          return;
+        }else if(result.user.role === 'Admin'){
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'Login through Web Portal',
+          });
+          return;
+        }
+
         await AsyncStorage.setItem('userId', result.user._id);
         // console.log(result.user._id); 
         // Alert.alert('Success', result.message);
+
         Toast.show({
           type: 'success',
           text1: 'Success',
@@ -76,6 +94,11 @@ const DoctorLogin = () => {
       }
     } catch (error) {
       // Alert.alert('Success', error.);
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Error during registration:'+ error,
+      });
       console.log('Error during registration:', error);
     }finally {
       setLoading(false); // Set loading back to false after request completes
