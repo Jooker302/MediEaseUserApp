@@ -37,7 +37,7 @@ MediEase Mobile App is a cross-platform application built with React Native, des
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url-app>
+   git clone https://github.com/Jooker302/MediEaseUserApp
    cd mediease-app
    ```
 
