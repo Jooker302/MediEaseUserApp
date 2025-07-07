@@ -1,79 +1,82 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# MediEase Mobile App
 
-# Getting Started
+## Overview
+MediEase Mobile App is a cross-platform application built with React Native, designed for doctors and patients to interact within the MediEase healthcare system. Patients can upload health reports (e.g., blood pressure, sugar levels), and the app communicates with a Python backend to provide personalized recommendations for medicine, exercises, and food plans. Developed as a Final Year Project (FYP), this prototype has limited polish and model accuracy due to constrained datasets.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
+### Patient Features
+- Upload health reports (e.g., blood pressure, sugar levels)
+- View personalized recommendations (medicine, exercises, food plans)
 
-## Step 1: Start the Metro Server
+### Doctor Features
+- View patient reports
+- Manage patient interactions
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- Integration with a Python backend for health recommendations
+- MongoDB for storing user and report data
+> **Note**: The recommendation model has limited accuracy due to small and incomplete datasets.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Tech Stack
+- **Framework**: React Native
+- **Database**: MongoDB (via API)
+- **Backend**: Python (see MediEase Python Model repository)
+- **Styling**: React Native styles
+- **API**: REST API (Next.js backend)
 
-```bash
-# using npm
-npm start
+## Related Repositories
+- [MediEase Website](https://github.com/Jooker302/MediEaseWebsite): Next.js Website
+- [MediEase Python Model](https://github.com/Jooker302/MediEaseAIModel): Python Backend
 
-# OR using Yarn
-yarn start
-```
+## Prerequisites
+- Node.js (v16 or higher)
+- React Native CLI or Expo CLI
+- Android Studio or Xcode for emulators
+- Python backend server running (see MediEase Python Model repository)
+- MongoDB instance (local or cloud, e.g., MongoDB Atlas)
 
-## Step 2: Start your Application
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url-app>
+   cd mediease-app
+   ```
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-### For Android
+3. Set up environment variables:
+   - Create a `.env` file in the root directory and add:
+     ```env
+     API_URL=<python-backend-api-url>
+     ```
 
-```bash
-# using npm
-npm run android
+4. Run the app:
+   - For Android:
+     ```bash
+     npx react-native run-android
+     ```
+   - For iOS:
+     ```bash
+     npx react-native run-ios
+     ```
+   > **Note**: Ensure an emulator or physical device is connected.
 
-# OR using Yarn
-yarn android
-```
+## Usage
+- **Patients**: Log in, upload health reports, and view recommendations.
+- **Doctors**: Log in to view patient reports and provide feedback.
+- Ensure the Next.js backend and Python model server are running for full functionality.
 
-### For iOS
+## Limitations
+- Prototype-level UI and functionality (FYP scope)
+- Limited recommendation model accuracy due to small and incomplete datasets
+- Basic error handling and user experience
 
-```bash
-# using npm
-npm run ios
+## Contributing
+This project was created for educational purposes. Feel free to fork and experiment, but it is not actively maintained.
 
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## License
+[MIT License](LICENSE)
